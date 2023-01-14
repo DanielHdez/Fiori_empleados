@@ -1,7 +1,29 @@
-<mvc:View controllerName="dhl.empleados.controller.MainView"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+<mvc:View xmlns:core2="sap.ui.core" controllerName="dhl.empleados.controller.MainView" 
+               xmlns:mvc="sap.ui.core.mvc" 
+               displayBlock="true" 
+               xmlns="sap.m"
+               xmlns:core="sap.ui.core">
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <HBox id="BOXID">
+                            <Label id="labelemployee"  text="{i18n>labelEmployee}" labelFor="inputemployee" class="sapUiSmallMargin" />
+                            <Input id="inputemployee" maxLength="6" width="200px"  class="sapUiSmallMarginEnd" liveChange="onvalidate" />
+                            <Label id="labelcountry"  text="{i18n>labelcountry}" labelFor="slcountry" class="sapUiSmallMargin" visible="false" />
+                            <Select id="slcountry" forceSelection="false" visible="false">
+                            <items>
+                                <core:Item key= "US" text="{i18n>countryUS}"></core:Item>
+                                <core:Item key= "UK" text="{i18n>countryUK}"></core:Item>
+                                <core:Item key= "ES" text="{i18n>countryES}"></core:Item>
+                            </items>
+                            </Select>
+                        </HBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
 </mvc:View>
+
