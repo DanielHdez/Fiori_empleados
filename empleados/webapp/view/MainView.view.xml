@@ -10,15 +10,59 @@
                     <content>
                         <HBox id="BOXID">
                             <Label id="labelemployee"  text="{i18n>labelEmployee}" labelFor="inputemployee" class="sapUiSmallMargin" />
-                            <Input id="inputemployee" maxLength="6" width="200px"  class="sapUiSmallMarginEnd" liveChange="onvalidate" />
-                            <Label id="labelcountry"  text="{i18n>labelcountry}" labelFor="slcountry" class="sapUiSmallMargin" visible="false" />
-                            <Select id="slcountry" forceSelection="false" visible="false">
+                            <!--<Input id="inputemployee" value="{/EmployeeId}" maxLength="6" width="200px"  class="sapUiSmallMarginEnd" liveChange="onvalidate" />-->
+                            <Input id="inputemployee" value="{/EmployeeId}" maxLength="6" width="200px"  class="sapUiSmallMarginEnd"/>
+                            <Label id="labelcountry"  text="{i18n>labelcountry}" labelFor="slcountry" class="sapUiSmallMargin" visible="true" />
+                            <Select id="slcountry" selectedKey="{/CountryKey}" forceSelection="false" items="{/ListCountry}" visible="true">
                             <items>
-                                <core:Item key= "US" text="{i18n>countryUS}"></core:Item>
+                                <core:Item key="{Key}" text="{Text}"></core:Item>
+                              <!--  <core:Item key= "US" text="{i18n>countryUS}"></core:Item>
                                 <core:Item key= "UK" text="{i18n>countryUK}"></core:Item>
-                                <core:Item key= "ES" text="{i18n>countryES}"></core:Item>
+                                <core:Item key= "ES" text="{i18n>countryES}"></core:Item>-->
                             </items>
                             </Select>
+                            <Button id="btnFilter" text="{i18n>btnFilter}" icon="sap-icon://search" press="onFilter" class="sapUiSmallMarginEnd"></Button>
+                            <Button id="btnClear" text="{i18n>btnClear}" icon="sap-icon://clear-filter" press="onClearFilter" class="sapUiSmallMarginEnd"></Button>
+                        </HBox>
+                        <HBox>
+                            <Panel>
+                                <Table id="tablaempleados" items="{/Employees}">
+                                    <columns>
+                                        <Column >
+                                            <header>
+                                                <Label text="{i18n>tableId}" ></Label>
+                                            </header>            
+                                        </Column>
+                                         <Column >
+                                            <header>
+                                                <Label text="{i18n>tableName}" ></Label>
+                                            </header>            
+                                        </Column>
+                                         <Column >
+                                            <header>
+                                                <Label text="{i18n>tableCountry}" ></Label>
+                                            </header>            
+                                        </Column>
+                                         <Column >
+                                            <header>
+                                                <Label text="{i18n>tableCity}" ></Label>
+                                            </header>            
+                                        </Column>    
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem >
+                                        <cells>
+                                            <Label text="{EmployeeID}"></Label>
+                                            <Label text="{FirstName},{LastName}"></Label>
+                                            <Label text="{Country}"></Label>
+                                            <Label text="{City}"></Label>
+                                        </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            
+                            </Panel>
+                        
                         </HBox>
                     </content>
                 </Page>
