@@ -2,10 +2,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
+    "sap/ui/model/FilterOperator"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
+     * @param {typeof sap.ui.model.Filter} Filter
+     * @param {typeof sap.ui.model.FilterOperator} FilterOperator
      */
     function (Controller, Filter, FilterOperator) {
         "use strict";
@@ -18,20 +20,20 @@ sap.ui.define([
             var i18nBundle = oView.getModel("i18n").getResourceBundle();
             // var i18nBundle = i18nModel.getResourceBundle();
             // var oJson = {
-            //     employeed: "123456",
-            //     conuntrykey: "UK",
-            //     listCountry: [
+            //     EmployeeId: "123456",
+            //     CountryKey: "UK",
+            //     ListCountry: [
             //         {
-            //             key : "UK",
-            //             text : i18nBundle.getText("countryUK")
+            //             Key : "UK",
+            //             Text : i18nBundle.getText("countryUK")
             //         },
             //         {
-            //             key : "US",
-            //             text : i18nBundle.getText("countryUS")
+            //             Key : "US",
+            //             Text : i18nBundle.getText("countryUS")
             //         },
             //         {
-            //             key : "ES",
-            //             text : i18nBundle.getText("countryES")
+            //             Key : "ES",
+            //             Text : i18nBundle.getText("countryES")
             //         },
 
             //     ]
@@ -44,7 +46,6 @@ sap.ui.define([
             // oJsonModel.attachRequestCompleted(function(oEventModel){
             //     console.log(JSON.stringify(oJsonModel.getData()));
             //});
-
             //oView.setModel(oJsonModel, "trad");
             oView.setModel(oJsonModel);
 
@@ -75,7 +76,18 @@ sap.ui.define([
             oModel.setProperty("/CountryKey", "");
 
         }
+        
 
+        //Obtenemos el contexto 
+        function showPostalCode(oEvent){
+            var itemPress = oEvent.getSource();
+            var oContext  = itemPress.getBindingContext();
+            var objectContext = oContext.getObject();
+
+            sap.m.MessageToast.show(objectContext.PostalCode);
+
+
+        }
         /* function myCheck() {
              var inputEmployee = this.byId("inputemployee");
              var valueEmployee = inputEmployee.getValue();
@@ -128,5 +140,6 @@ sap.ui.define([
         Main.prototype.onInit = onInit;
         Main.prototype.onClearFilter = onClearFilter;
         Main.prototype.onFilter = onFilter;
+        Main.prototype.showPostalCode = showPostalCode;
         return Main;
     });
