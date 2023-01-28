@@ -11,11 +11,11 @@
                         <HBox id="BOXID">
                             <Label id="labelemployee"  text="{i18n>labelEmployee}" labelFor="inputemployee" class="sapUiSmallMargin" />
                             <!--<Input id="inputemployee" value="{/EmployeeId}" maxLength="6" width="200px"  class="sapUiSmallMarginEnd" liveChange="onvalidate" />-->
-                            <Input id="inputemployee" value="{/EmployeeId}" maxLength="6" width="200px"  class="sapUiSmallMarginEnd"/>
+                            <Input id="inputemployee" value="{Countries>/EmployeeId}" maxLength="6" width="200px"  class="sapUiSmallMarginEnd"/>
                             <Label id="labelcountry"  text="{i18n>labelcountry}" labelFor="slcountry" class="sapUiSmallMargin" visible="true" />
-                            <Select id="slcountry" selectedKey="{/CountryKey}" forceSelection="false" items="{/ListCountry}" visible="true">
+                            <Select id="slcountry" selectedKey="{Countries>/CountryKey}" forceSelection="false" items="{Countries>/ListCountry}" visible="true">
                             <items>
-                                <core:Item key="{Key}" text="{Text}"></core:Item>
+                                <core:Item key="{Countries>Key}" text="{Countries>Text}"></core:Item>
                               <!--  <core:Item key= "US" text="{i18n>countryUS}"></core:Item>
                                 <core:Item key= "UK" text="{i18n>countryUK}"></core:Item>
                                 <core:Item key= "ES" text="{i18n>countryES}"></core:Item>-->
@@ -26,24 +26,26 @@
                         </HBox>
                         <HBox>
                             <Panel>
+                                <Button id="btnShowCity" text="{i18n>showCity}" visible="{Config>/visibleBtnShowCity}" press="onShowCity"/>
+                                <Button id="btnHideCity" text="{i18n>hideCity}" visible="{Config>/visibleBtnHideCity}" press="onHideCity"/>
                                 <Table id="tablaempleados" items="{/Employees}">
                                     <columns>
-                                        <Column >
+                                        <Column visible="{Config>/visibleId}" >
                                             <header>
                                                 <Label text="{i18n>tableId}" ></Label>
                                             </header>            
                                         </Column>
-                                         <Column >
+                                         <Column visible="{Config>/visibleName}" >
                                             <header>
                                                 <Label text="{i18n>tableName}" ></Label>
                                             </header>            
                                         </Column>
-                                         <Column >
+                                         <Column visible="{Config>/visibleCountry}" >
                                             <header>
                                                 <Label text="{i18n>tableCountry}" ></Label>
                                             </header>            
                                         </Column>
-                                         <Column >
+                                         <Column visible="{Config>/visibleCity}" >
                                             <header>
                                                 <Label text="{i18n>tableCity}" ></Label>
                                             </header>            

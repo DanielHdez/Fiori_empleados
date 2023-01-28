@@ -43,16 +43,36 @@ sap.ui.define([
             //PAra cargar los datos del Json
             oJsonModel.loadData("../localService/Empleados.json", false);
             //Comprobamos si los datos se han cargado
-            // oJsonModel.attachRequestCompleted(function(oEventModel){
-            //     console.log(JSON.stringify(oJsonModel.getData()));
-            //});
+          //  oJsonModel.attachRequestCompleted(function(oEventModel){
+          //       console.log(JSON.stringify(oJsonModel.getData()));
+          //  });
             //oView.setModel(oJsonModel, "trad");
             oView.setModel(oJsonModel);
+            var oJsonModelCountries = new sap.ui.model.json.JSONModel();
+            oJsonModelCountries.loadData("../localService/Countries.json", false);
+            //Comprobamos si los datos se han cargado
+          //  oJsonModelCountries.attachRequestCompleted(function(oEventModel){
+          //      console.log(JSON.stringify(oJsonModel.getData()));
+          // });
+            oView.setModel(oJsonModelCountries,"Countries");
+    
+            var oJsonModelConfig = new sap.ui.model.json.JSONModel({
+                visibleId: true,
+                visibleName: true,
+                visibleCountry: true,
+                visibleCity: false,
+                visibleBtnShowCity: true,
+                visibleBtnHideCity: false
+            });
+
+            oView.setModel(oJsonModelConfig,"Config");
+            
+         
 
         }
 
         function onFilter(){
-            var oJson = this.getView().getModel().getData();
+            var oJson = this.getView().getModel("Countries").getData();
 
             var filters = [];
 
@@ -71,7 +91,7 @@ sap.ui.define([
         }
 
         function onClearFilter(){
-            var oModel = this.getView().getModel();
+            var oModel = this.getView().getModel("Countries");
             oModel.setProperty("/EmployeeId", "");
             oModel.setProperty("/CountryKey", "");
 
@@ -87,6 +107,22 @@ sap.ui.define([
             sap.m.MessageToast.show(objectContext.PostalCode);
 
 
+        }
+
+        function onShowCity(){
+            var oModeloConfig = this.getView().getModel("Config");
+            oModeloConfig.setProperty("/visibleCity", true);
+            oModeloConfig.setProperty("/visibleBtnShowCity",false);
+            oModeloConfig.setProperty("/visibleBtnHideCity",true);
+
+
+        }
+
+        function onHideCity(){
+            var oModeloConfig = this.getView().getModel("Config");
+            oModeloConfig.setProperty("/visibleCity", false);
+            oModeloConfig.setProperty("/visibleBtnShowCity",true);
+            oModeloConfig.setProperty("/visibleBtnHideCity",false);
         }
         /* function myCheck() {
              var inputEmployee = this.byId("inputemployee");
@@ -141,5 +177,7 @@ sap.ui.define([
         Main.prototype.onClearFilter = onClearFilter;
         Main.prototype.onFilter = onFilter;
         Main.prototype.showPostalCode = showPostalCode;
+        Main.prototype.onShowCity = onShowCity;
+        Main.prototype.onHideCity = onHideCity;
         return Main;
     });
